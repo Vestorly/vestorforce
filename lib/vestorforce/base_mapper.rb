@@ -1,7 +1,7 @@
 module Vestorforce
   class BaseMapper
-    def map(item)
-      item
+    def self.map
+      Proc.new { |item| item }
     end
   end
 end

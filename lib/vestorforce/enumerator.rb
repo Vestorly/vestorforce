@@ -2,7 +2,7 @@ module Vestorforce
   class Enumerator
     attr_reader :mapper
 
-    def initialize(mapper = BaseMapper.new)
+    def initialize(mapper = BaseMapper.map)
       @mapper = mapper
     end
 

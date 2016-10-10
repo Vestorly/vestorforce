@@ -7,10 +7,6 @@ require 'vestorforce/enumerator'
 require 'vestorforce/iterator'
 
 module Vestorforce
-  def self.hi
-    puts 'hello world!'
-  end
-
   def self.client(config)
     Api.new(config)
   end
