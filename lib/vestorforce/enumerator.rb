@@ -1,5 +1,5 @@
 module Vestorforce
-  module Enumerator
+  class Enumerator
     attr_reader :mapper
 
     def initialize(mapper = BaseMapper.new)
@@ -8,7 +8,7 @@ module Vestorforce
 
     def enumerate(collection)
       collection.each_with_index do |item, index|
-        yield mapper.map(item)
+        mapper.call(item)
       end
     end
   end

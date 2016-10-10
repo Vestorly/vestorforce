@@ -35,20 +35,44 @@ describe Vestorforce do
   end
 
   describe '#campaign_members' do
-    it 'returns nested campaigns' do
-      query_string = "SELECT Id, Email, FirstName, LastName FROM " \
-        "CampaignMember where CampaignId='12345'"
+    it 'does the right query call' do
+      query_string = "SELECT Id, Email, FirstName, LastName FROM CampaignMember " \
+        "where CampaignId='12345' where (email <>'' or email <> NULL) " \
+        "ORDER BY Id LIMIT 1000"
       expect(restforce).to receive(:query).with(query_string)
       api = described_class.client({})
-      api.campaign_members('12345')
+      api.campaign_members('12345') do |item|
+        item
+      end
     end
-  end
 
-  describe '#decorators' do
-    it "decorates" do
-      query_string = SalesforceCampaign::Queries.campaign_by_name('Vestorly')
-      query = SalesforceCampaign::PaginatorDecorator.new(query_string)
-      query.prepare_query
+    #new_s = Struct.new("Item", :Id, :Email)
+    it 'enumerates over the results using the default mapper' do
+      query_string = "SELECT Id, Email, FirstName, LastName FROM CampaignMember " \
+        "where CampaignId='12345' where (email <>'' or email <> NULL) " \
+        "ORDER BY Id LIMIT 1000"
+      result_items = ['1', '2', '3', '4']
+      expect(restforce).to receive(:query).with(query_string).and_return(result_items)
+      api = described_class.client({})
+      members = api.campaign_members('12345')
+      binding.pry
+      puts
+    end
+
+    it 'enumerates over the results using a custom mapper' do
+      query_string = "SELECT Id, Email, FirstName, LastName FROM CampaignMember " \
+        "where CampaignId='12345' where (email <>'' or email <> NULL) " \
+        "ORDER BY Id LIMIT 1000"
+      result_items = ['1', '2', '3', '4']
+      expect(restforce).to receive(:query).with(query_string).and_return(result_items)
+      api = described_class.client({})
+      count = 0
+      api.campaign_members('12345') do |item|
+        count += 1
+        expect(item.to_i).to eq count
+        item
+      end
+      expect(count).to eq 4
     end
   end
 end
