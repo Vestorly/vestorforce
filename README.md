@@ -1,6 +1,5 @@
-
-Simple way to store warnings and errors affecting users as messages. Stored
-messages can be linked to a helpful link so they can read more about the problem
+A salesforce api wrapper that makes it easy to create queries for
+salesforce and then iterate over items in the response.
 
 to test it out without a rails environment
 `irb -Ilib -rvestorforce`
@@ -21,17 +20,24 @@ Or install it yourself as:
     $ gem install vestorforce
 
 ## Usage
-`include Vestorforce::Notifiable` in the model you want to have notifications eg. the user model.
-
-To create a notification:
 ```
-Vestorforce.notify(
-    @user,
-    'this_is_the_action_key',
-    context: 'you get some context',
-    more_context: 'you get some context',
-    even_more_context: 'you get some context'
-    )
+authentication_hash = {
+  oauth_token: token,
+  instance_url: instance_url,
+  refresh_token: refresh_token,
+  client_id: client_id,
+  client_secret: client_secret
+}
+```
+`client = Vestorforce.client(authentication_hash)`
+```
+client.campaign_by_name('Vestorly') # to get the id of a campaign by its
+name
+client.nested_campaigns(campaign_id) # to get the names and ids of the
+nested campaigns
+client.campaign_members(campaign_id) do |member|
+  save_member_to_database(member)
+end
 ```
 
 ## Contributing
