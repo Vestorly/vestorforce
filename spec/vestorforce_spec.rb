@@ -4,6 +4,13 @@ require 'pry'
 
 describe Vestorforce do
   let(:restforce) { double('RestforceClient') }
+  let(:members_response) do
+    Struct.new('Member', :Id, :Email)
+    4.times.map do |i|
+      Struct::Member.new(i, "email#{i}@example.com")
+    end
+  end
+
   before do
     expect(Restforce).to receive(:new).and_return(restforce)
   end
@@ -41,34 +48,24 @@ describe Vestorforce do
         "ORDER BY Id LIMIT 1000"
       expect(restforce).to receive(:query).with(query_string)
       api = described_class.client({})
-      api.campaign_members('12345') do |item|
-        item
-      end
-    end
-
-    #new_s = Struct.new("Item", :Id, :Email)
-    it 'enumerates over the results using the default mapper' do
-      query_string = "SELECT Id, Email, FirstName, LastName FROM CampaignMember " \
-        "where CampaignId='12345' and (email <>'' or email <> NULL) " \
-        "ORDER BY Id LIMIT 1000"
-      result_items = ['1', '2', '3', '4']
-      expect(restforce).to receive(:query).with(query_string).and_return(result_items)
-      api = described_class.client({})
-      members = api.campaign_members('12345')
+      api.campaign_members('12345')
     end
 
     it 'enumerates over the results using a custom mapper' do
       query_string = "SELECT Id, Email, FirstName, LastName FROM CampaignMember " \
         "where CampaignId='12345' and (email <>'' or email <> NULL) " \
         "ORDER BY Id LIMIT 1000"
-      result_items = ['1', '2', '3', '4']
-      expect(restforce).to receive(:query).with(query_string).and_return(result_items)
+      query_string2 = "SELECT Id, Email, FirstName, LastName FROM CampaignMember " \
+        "where CampaignId='12345' and (email <>'' or email <> NULL) " \
+        "and (Id > '3') " \
+        "ORDER BY Id LIMIT 1000"
+      allow(restforce).to receive(:query).with(query_string).and_return(members_response)
+      allow(restforce).to receive(:query).with(query_string2).and_return([])
       api = described_class.client({})
       count = 0
       api.campaign_members('12345') do |item|
+        expect(item.Id).to eq count
         count += 1
-        expect(item.to_i).to eq count
-        item
       end
       expect(count).to eq 4
     end

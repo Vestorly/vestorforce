@@ -14,7 +14,7 @@ module Vestorforce
 
       constraints = " and (email <>'' or email <> NULL)" \
         "#{greater_than_date}" \
-        " #{greater_than_id}ORDER BY Id" \
+        "#{greater_than_id} ORDER BY Id" \
         " LIMIT #{page_size}"
       @query + constraints
     end

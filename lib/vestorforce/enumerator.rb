@@ -7,7 +7,7 @@ module Vestorforce
     end
 
     def enumerate(collection)
-      collection.each_with_index do |item, index|
+      collection.map.with_index do |item, index|
         mapper.call(item)
       end
     end

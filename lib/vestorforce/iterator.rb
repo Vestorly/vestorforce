@@ -19,7 +19,7 @@ module Vestorforce
     end
 
     def last_id_from_items(items)
-      return if (items.last.nil? || items.last.empty?)
+      return if items.last.nil?
       return if !items.last.respond_to?(:Id)
       items.last.Id
     end
