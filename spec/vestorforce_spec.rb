@@ -42,8 +42,13 @@ describe Vestorforce do
   end
 
   describe '#campaign_members' do
+    let(:select_query) do
+      "SELECT Id, Contact.Email, Lead.Email, Contact.FirstName, " \
+        "Lead.FirstName, Contact.LastName, Lead.LastName " \
+        "FROM CampaignMember "
+    end
     it 'does the right query call' do
-      query_string = "SELECT Id, Email, FirstName, LastName FROM CampaignMember " \
+      query_string = "#{select_query}" \
         "where CampaignId='12345' and (email <>'' or email <> NULL) " \
         "ORDER BY Id LIMIT 1000"
       expect(restforce).to receive(:query).with(query_string)
@@ -52,10 +57,10 @@ describe Vestorforce do
     end
 
     it 'enumerates over the results using a custom mapper' do
-      query_string = "SELECT Id, Email, FirstName, LastName FROM CampaignMember " \
+      query_string = "#{select_query}" \
         "where CampaignId='12345' and (email <>'' or email <> NULL) " \
         "ORDER BY Id LIMIT 1000"
-      query_string2 = "SELECT Id, Email, FirstName, LastName FROM CampaignMember " \
+      query_string2 = "#{select_query}" \
         "where CampaignId='12345' and (email <>'' or email <> NULL) " \
         "and (Id > '3') " \
         "ORDER BY Id LIMIT 1000"
