@@ -21,11 +21,11 @@ describe Vestorforce do
     end
   end
 
-  describe '#parent_campaign' do
+  describe '#campaign_by_name' do
     it 'returns campaigns' do
       expect(restforce)
         .to receive(:query)
-        .with("SELECT Id FROM Campaign where name='Vestorly'")
+        .with("SELECT Id, Name, NumberOfContacts, NumberOfLeads FROM Campaign where name='Vestorly'")
       client = described_class.client({})
       client.campaign_by_name('Vestorly')
     end

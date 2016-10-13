@@ -1,7 +1,8 @@
 module Vestorforce
   module Queries
     def self.campaign_by_name(campaign_name)
-      "SELECT Id FROM Campaign where name='#{campaign_name}'"
+      "SELECT Id, Name, NumberOfContacts, NumberOfLeads FROM Campaign where " \
+        "name='#{campaign_name}'"
     end
 
     def self.child_campaigns(parent_id)
