@@ -49,7 +49,7 @@ describe Vestorforce do
     end
     it 'does the right query call' do
       query_string = "#{select_query}" \
-        "where CampaignId='12345' and (email <>'' or email <> NULL) " \
+        "where CampaignId='12345' " \
         "ORDER BY Id LIMIT 1000"
       expect(restforce).to receive(:query).with(query_string)
       api = described_class.client({})
@@ -58,10 +58,10 @@ describe Vestorforce do
 
     it 'enumerates over the results using a custom mapper' do
       query_string = "#{select_query}" \
-        "where CampaignId='12345' and (email <>'' or email <> NULL) " \
+        "where CampaignId='12345' " \
         "ORDER BY Id LIMIT 1000"
       query_string2 = "#{select_query}" \
-        "where CampaignId='12345' and (email <>'' or email <> NULL) " \
+        "where CampaignId='12345' " \
         "and (Id > '3') " \
         "ORDER BY Id LIMIT 1000"
       allow(restforce).to receive(:query).with(query_string).and_return(members_response)
