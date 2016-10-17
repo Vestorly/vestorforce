@@ -50,20 +50,30 @@ describe Vestorforce do
     it 'does the right query call' do
       query_string = "#{select_query}" \
         "where CampaignId='12345' " \
-        "ORDER BY Id LIMIT 1000"
+        "ORDER BY Id LIMIT 100"
       expect(restforce).to receive(:query).with(query_string)
       api = described_class.client({})
       api.campaign_members('12345')
     end
 
+    it 'does the right query call with a certain date' do
+      query_string = "#{select_query}" \
+        "where CampaignId='12345' " \
+        "and (CreatedDate > 1700-01-01T00:00:00Z) " \
+        "ORDER BY Id LIMIT 100"
+      expect(restforce).to receive(:query).with(query_string)
+      api = described_class.client({})
+      api.campaign_members('12345', date: '1700-01-01T00:00:00Z')
+    end
+
     it 'enumerates over the results using a custom mapper' do
       query_string = "#{select_query}" \
         "where CampaignId='12345' " \
-        "ORDER BY Id LIMIT 1000"
+        "ORDER BY Id LIMIT 100"
       query_string2 = "#{select_query}" \
         "where CampaignId='12345' " \
         "and (Id > '3') " \
-        "ORDER BY Id LIMIT 1000"
+        "ORDER BY Id LIMIT 100"
       allow(restforce).to receive(:query).with(query_string).and_return(members_response)
       allow(restforce).to receive(:query).with(query_string2).and_return([])
       api = described_class.client({})

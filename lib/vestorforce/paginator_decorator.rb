@@ -1,7 +1,7 @@
 module Vestorforce
   class PaginatorDecorator < SimpleDelegator
     attr_reader :date, :page_size
-    def initialize(query, date: nil, page_size: 1000)
+    def initialize(query, date, page_size: 100)
       @date = date
       @page_size = page_size
       @query = query

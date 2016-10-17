@@ -20,9 +20,9 @@ module Vestorforce
       @client.query(query_string)
     end
 
-    def campaign_members(campaign_id, &mapper)
+    def campaign_members(campaign_id, date: nil, &mapper)
       query_string = Queries.campaign_members(campaign_id)
-      query = PaginatorDecorator.new(query_string)
+      query = PaginatorDecorator.new(query_string, date)
       enumerator = block_given? ? Enumerator.new(mapper) : Enumerator.new
       Iterator.new(enumerator, query, @client).iterate
     end
