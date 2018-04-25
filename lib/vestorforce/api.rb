@@ -20,14 +20,7 @@ module Vestorforce
       @client.query(query_string)
     end
 
-    def campaign_members(campaign_id, date: nil, &mapper)
-      query_string = Queries.campaign_members(campaign_id)
-      query = PaginatorDecorator.new(query_string, date)
-      enumerator = block_given? ? Enumerator.new(mapper) : Enumerator.new
-      Iterator.new(enumerator, query, @client).iterate
-    end
-
-    def campaign_members_batch_array(campaign_id, date: nil)
+    def campaign_members(campaign_id, date: nil)
       campaign_members_query = Queries.campaign_members(campaign_id)
       Vestorforce::BatchArray.new(
         query: campaign_members_query,

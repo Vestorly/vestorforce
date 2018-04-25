@@ -89,27 +89,5 @@ describe Vestorforce::BatchArray do
           .times
       end
     end
-
-    context 'when index is over the limit' do
-      let(:instance) do
-        described_class.new(
-          query: query,
-          client: client,
-          index: 2600
-        )
-      end
-
-      it 'should exit immediately' do
-        expect(client)
-          .to receive(:query)
-          .with(/OFFSET 2600/)
-          .and_return([members_response])
-
-        expect { |b| instance.batch_each(&b) }
-          .to yield_control
-          .exactly(0)
-          .times
-      end
-    end
   end
 end
