@@ -26,5 +26,15 @@ module Vestorforce
       enumerator = block_given? ? Enumerator.new(mapper) : Enumerator.new
       Iterator.new(enumerator, query, @client).iterate
     end
+
+    def campaign_members_batch_array(campaign_id, date: nil)
+      campaign_members_query = Queries.campaign_members(campaign_id)
+      Vestorforce::BatchArray.new(
+        query: campaign_members_query,
+        client: @client,
+        index: 0,
+        batch_size: 100
+      )
+    end
   end
 end
