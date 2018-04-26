@@ -12,7 +12,7 @@ module Vestorforce
 
     def self.campaign_members(campaign_id)
       "SELECT " \
-        "Id, Contact.Email, Lead.Email, Contact.FirstName, Lead.FirstName, Contact.LastName, Lead.LastName " \
+        "Id, ContactId, LeadId, Contact.Email, Lead.Email, Contact.FirstName, Lead.FirstName, Contact.LastName, Lead.LastName " \
         "FROM CampaignMember " \
         "where CampaignId='#{campaign_id}'"
     end
