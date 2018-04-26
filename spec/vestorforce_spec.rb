@@ -40,4 +40,9 @@ describe Vestorforce do
       api.nested_campaigns('12345')
     end
   end
+
+  describe '#campaign_members' do
+    it 'returns campaign members' do
+    end
+  end
 end

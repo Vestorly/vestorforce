@@ -39,7 +39,8 @@ describe Vestorforce::BatchArray do
         described_class.new(
           query: query,
           client: client,
-          index: 1,
+          date: 2.years.ago,
+          offset: 1,
           batch_size: 2
         )
       end
@@ -73,7 +74,8 @@ describe Vestorforce::BatchArray do
         described_class.new(
           query: query,
           client: client,
-          index: 5
+          date: 2.years.ago,
+          offset: 5
         )
       end
 

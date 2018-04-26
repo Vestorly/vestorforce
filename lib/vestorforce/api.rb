@@ -25,7 +25,8 @@ module Vestorforce
       Vestorforce::BatchArray.new(
         query: campaign_members_query,
         client: @client,
-        index: 0,
+        date: date,
+        offset: 0,
         batch_size: 100
       )
     end
