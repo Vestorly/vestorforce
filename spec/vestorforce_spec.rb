@@ -43,7 +43,7 @@ describe Vestorforce do
 
   describe '#campaign_members' do
     let(:select_query) do
-      "SELECT Id, Contact.Email, Lead.Email, Contact.FirstName, " \
+      "SELECT Id, ContactId, LeadId, Contact.Email, Lead.Email, Contact.FirstName, " \
         "Lead.FirstName, Contact.LastName, Lead.LastName " \
         "FROM CampaignMember "
     end

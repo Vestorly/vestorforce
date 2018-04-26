@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    vestorforce (0.0.1)
+    vestorforce (0.0.2)
 
 GEM
   remote: https://rubygems.org/
@@ -21,7 +21,7 @@ GEM
     faraday_middleware (0.10.0)
       faraday (>= 0.7.4, < 0.10)
     hashie (3.4.6)
-    json (1.8.3)
+    json (1.8.6)
     method_source (0.8.2)
     multipart-post (2.0.0)
     pry (0.10.4)
@@ -74,4 +74,4 @@ DEPENDENCIES
   vestorforce!
 
 BUNDLED WITH
-   1.11.2
+   1.16.0
