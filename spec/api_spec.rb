@@ -10,15 +10,15 @@ ENV['client_secret']
 describe Vestorforce::Api do
   let(:auth_hash) do
     {
-      :oauth_token =>     ENV['oath_token'],
-      :instance_url =>    ENV['instance_url'],
-      :refresh_token =>   ENV['refresh_token'],
-      :client_id =>       ENV['client_id'],
-      :client_secret =>   ENV['client_secret']
+      oauth_token:      ENV['oath_token'],
+      instance_url:     ENV['instance_url'],
+      refresh_token:    ENV['refresh_token'],
+      client_id:        ENV['client_id'],
+      client_secret:    ENV['client_secret']
     }
   end
   let(:instance) { described_class.new(auth_hash) }
-  let(:parent_campaign_id) { "701f4000000UZyIAAW" }
+  let(:parent_campaign_id) { '701f4000000UZyIAAW' }
 
   it 'connects correctly to the restforce api' do
     instance
@@ -27,7 +27,7 @@ describe Vestorforce::Api do
 
     expect(client_options)
       .to include(auth_hash)
-      .and include(:api_version => '29.0')
+      .and include(api_version: '29.0')
   end
 
   describe '#campaign_by_name' do
