@@ -1,14 +1,14 @@
 module Vestorforce
   class Api
-    DEFAULT_SALESFORCE_URL = 'https://na1.salesforce.com'
-    def initialize(opts={})
+    DEFAULT_SALESFORCE_URL = 'https://na1.salesforce.com'.freeze
+    def initialize(opts = {})
       @client = Restforce.new(
-        :oauth_token    => opts[:oauth_token],
-        :instance_url   => opts[:instance_url] || DEFAULT_SALESFORCE_URL,
-        :refresh_token  => opts[:refresh_token],
-        :client_id      => opts[:client_id],
-        :client_secret  => opts[:client_secret],
-        api_version: '29.0'
+        oauth_token:    opts[:oauth_token],
+        instance_url:   opts[:instance_url] || DEFAULT_SALESFORCE_URL,
+        refresh_token:  opts[:refresh_token],
+        client_id:      opts[:client_id],
+        client_secret:  opts[:client_secret],
+        api_version:    '29.0'
       )
     end
 
