@@ -3,7 +3,7 @@ require 'restforce'
 require 'pry'
 
 describe Vestorforce do
-  let(:restforce) { double('RestforceClient') }
+  let(:restforce) { instance_double(Restforce::Client) }
   let(:members_response) do
     Struct.new('Member', :Id, :Email)
     4.times.map do |i|
