@@ -1,11 +1,6 @@
 require 'spec_helper'
 require 'restforce'
 require 'pry'
-ENV['oath_token']
-ENV['instance_url']
-ENV['refresh_token']
-ENV['client_id']
-ENV['client_secret']
 
 describe Vestorforce::Api do
   let(:auth_hash) do
@@ -27,7 +22,7 @@ describe Vestorforce::Api do
 
     expect(client_options)
       .to include(auth_hash)
-      # .and include(api_version: '29.0')
+      .and include(api_version: '29.0')
   end
 
   describe '#campaign_by_name' do
