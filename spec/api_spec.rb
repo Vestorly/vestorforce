@@ -31,8 +31,16 @@ describe Vestorforce::Api do
     it 'returns a campaign with the correct format' do
       campaign = campaign_by_name.first
 
-      expect(campaign).to respond_to(:Id, :Name)
+      expect(campaign)
+        .to respond_to(
+          :Id,
+          :Name,
+          :NumberOfContacts,
+          :NumberOfLeads,
+          :LastReferencedDate
+        )
       expect(campaign.Id).to eq(parent_campaign_id)
+      expect(campaign.LastReferencedDate.class).to eq(String)
     end
   end
 
@@ -43,7 +51,14 @@ describe Vestorforce::Api do
       campaign = nested_campaigns.first
 
       expect(campaign.Name).to eq('Nested')
-      expect(campaign).to respond_to(:Id)
+      expect(campaign)
+        .to respond_to(
+          :Id,
+          :NumberOfContacts,
+          :NumberOfLeads,
+          :LastReferencedDate
+        )
+      expect(campaign.LastReferencedDate.class).to eq(String)
     end
   end
 

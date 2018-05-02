@@ -25,7 +25,7 @@ describe Vestorforce do
     it 'returns campaigns' do
       expect(restforce)
         .to receive(:query)
-        .with("SELECT Id, Name, NumberOfContacts, NumberOfLeads FROM Campaign where name='Vestorly'")
+        .with("SELECT Id, Name, NumberOfContacts, NumberOfLeads, LastReferencedDate FROM Campaign where name='Vestorly'")
       client = described_class.client({})
       client.campaign_by_name('Vestorly')
     end
@@ -33,7 +33,7 @@ describe Vestorforce do
 
   describe '#nested_campaigns' do
     it 'returns nested campaigns' do
-      query_string = "SELECT Id, Name, NumberOfContacts, NumberOfLeads From " \
+      query_string = "SELECT Id, Name, NumberOfContacts, NumberOfLeads, LastReferencedDate From " \
         "Campaign where ParentId='12345'"
       expect(restforce).to receive(:query).with(query_string)
       api = described_class.client({})

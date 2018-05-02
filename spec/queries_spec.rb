@@ -2,9 +2,6 @@ require 'spec_helper'
 require 'restforce'
 require 'pry'
 
-# This is a temporary test. Very hacky way 
-# to check when the members response is changed.
-
 describe Vestorforce::Queries do
   let(:auth_hash) do
     {
