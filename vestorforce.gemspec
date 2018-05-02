@@ -6,11 +6,10 @@ require 'vestorforce/version'
 Gem::Specification.new do |spec|
   spec.name          = 'vestorforce'
   spec.version       = Vestorforce::VERSION
-  spec.authors       = ['Michael Polycarpou']
-  spec.email         = ['michaelpolycarpou@gmail.com']
+  spec.authors       = ['Michael Polycarpou', 'Remy Carr']
+  spec.email         = ['remy@vestorly.com']
   spec.summary       = %q(
-    Library for easily querying the salesforce api with large queries,
-    paginating over the results and performing an action on each item
+    A wrapper around restforce for querying campaigns and campaign members.
   )
   spec.description   = %q(
     Salesforce api ruby abstraction
