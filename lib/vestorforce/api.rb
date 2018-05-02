@@ -7,8 +7,8 @@ module Vestorforce
         instance_url:   opts[:instance_url] || DEFAULT_SALESFORCE_URL,
         refresh_token:  opts[:refresh_token],
         client_id:      opts[:client_id],
-        client_secret:  opts[:client_secret],
-        api_version:    '29.0'
+        client_secret:  opts[:client_secret] #,
+        # api_version:    '29.0'
       )
     end
 
