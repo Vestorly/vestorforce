@@ -30,8 +30,8 @@ module Vestorforce
       date_constraint = @date ? "and (CreatedDate > #{@date} " : ''
       query_constraints =
         'ORDER BY Id ' \
-        "OFFSET #{@offset} " \
-        "LIMIT #{@batch_size}"
+        "LIMIT #{@batch_size} " \
+        "OFFSET #{@offset}"
 
       @current_batch = @client.query(@query + date_constraint + query_constraints)
     end

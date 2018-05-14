@@ -14,7 +14,7 @@ module Vestorforce
       "SELECT " \
         "Id, ContactId, LeadId, Contact.Email, Lead.Email, Contact.FirstName, Lead.FirstName, Contact.LastName, Lead.LastName " \
         "FROM CampaignMember " \
-        "where CampaignId='#{campaign_id}'"
+        "where CampaignId='#{campaign_id}' "
     end
   end
 end
