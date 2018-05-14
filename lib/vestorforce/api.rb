@@ -1,7 +1,7 @@
 module Vestorforce
   class Api
     DEFAULT_SALESFORCE_URL = 'https://na1.salesforce.com'
-    def initialize(opts={})
+    def initialize(opts = {})
       @client = Restforce.new(
         :oauth_token    => opts[:oauth_token],
         :instance_url   => opts[:instance_url] || DEFAULT_SALESFORCE_URL,

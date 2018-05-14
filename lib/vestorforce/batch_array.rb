@@ -3,7 +3,7 @@ module Vestorforce
 
     attr_reader :current_batch
 
-    def initialize(query:, client:, date:, offset: 0, batch_size: 50)
+    def initialize(query:, client:, date: nil, offset: 0, batch_size: 50)
       @query = query
       @client = client
       @date = date
@@ -27,7 +27,7 @@ module Vestorforce
     private
 
     def set_batch
-      date_constraint = "and (CreatedDate > #{date.iso8601.to_s})"
+      date_constraint = @date ? "and (CreatedDate > #{@date} " : ''
       query_constraints =
         'ORDER BY Id ' \
         "OFFSET #{@offset} " \

@@ -39,7 +39,6 @@ describe Vestorforce::BatchArray do
         described_class.new(
           query: query,
           client: client,
-          date: 2.years.ago,
           offset: 1,
           batch_size: 2
         )
@@ -74,7 +73,7 @@ describe Vestorforce::BatchArray do
         described_class.new(
           query: query,
           client: client,
-          date: 2.years.ago,
+          date: Date.new,
           offset: 5
         )
       end
@@ -83,6 +82,7 @@ describe Vestorforce::BatchArray do
         expect(client)
           .to receive(:query)
           .with(/OFFSET 5/)
+          .with(/CreatedDate >/)
           .and_return([])
 
         expect { |b| instance.batch_each(&b) }
